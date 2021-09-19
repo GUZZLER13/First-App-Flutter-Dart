@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 void main() {
   runApp(const MyApp());
@@ -100,12 +99,12 @@ class MyApp extends StatelessWidget {
           body: ListView(
             children: [
               FadeInImage.assetNetwork(
+                placeholder: "images/loader.gif",
                 image:
                     'https://www.atelierdeschefs.com/media/recette-e30299-pizza-pepperoni-tomate-mozza.jpg',
                 width: 600,
                 height: 240,
                 fit: BoxFit.cover,
-                placeholder: "images/loader.gif",
               ),
               titleSection,
               buttonSection,
