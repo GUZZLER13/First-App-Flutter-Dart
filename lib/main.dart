@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 void main() {
   runApp(const MyApp());
@@ -52,16 +53,32 @@ class MyApp extends StatelessWidget {
       padding: const EdgeInsets.all(32),
       child: const Text(
         "Per hoc minui studium suum existimans "
-            "Paulus, ut erat in conplicandis negotiis artifex dirus, unde ei Catenae inditum est cognomentum, vicarium ipsum eos quibus praeerat adhuc defensantem ad sortem "
-            "periculorum communium traxit. et instabat ut eum quoque cum tribunis et aliis pluribus ad comitatum imperatoris vinctum perduceret: quo percitus ille exitio urgente "
-            "abrupto ferro eundem adoritur Paulum. et quia languente dextera, letaliter ferire non potuit, iam districtum mucronem in proprium latus inpegit. hocquedeformi genere "
-            "mortis excessit e vita iustissimus rector ausus miserabiles casus levare multorum.",
+        "Paulus, ut erat in conplicandis negotiis artifex dirus, unde ei Catenae inditum est cognomentum, vicarium ipsum eos quibus praeerat adhuc defensantem ad sortem "
+        "periculorum communium traxit. et instabat ut eum quoque cum tribunis et aliis pluribus ad comitatum imperatoris vinctum perduceret: quo percitus ille exitio urgente "
+        "abrupto ferro eundem adoritur Paulum. et quia languente dextera, letaliter ferire non potuit, iam districtum mucronem in proprium latus inpegit. hocquedeformi genere "
+        "mortis excessit e vita iustissimus rector ausus miserabiles casus levare multorum."
+        "Per hoc minui studium suum existimans "
+        "Paulus, ut erat in conplicandis negotiis artifex dirus, unde ei Catenae inditum est cognomentum, vicarium ipsum eos quibus praeerat adhuc defensantem ad sortem "
+        "periculorum communium traxit. et instabat ut eum quoque cum tribunis et aliis pluribus ad comitatum imperatoris vinctum perduceret: quo percitus ille exitio urgente "
+        "abrupto ferro eundem adoritur Paulum. et quia languente dextera, letaliter ferire non potuit, iam districtum mucronem in proprium latus inpegit. hocquedeformi genere "
+        "mortis excessit e vita iustissimus rector ausus miserabiles casus levare multorum."
+        "Per hoc minui studium suum existimans "
+        "Paulus, ut erat in conplicandis negotiis artifex dirus, unde ei Catenae inditum est cognomentum, vicarium ipsum eos quibus praeerat adhuc defensantem ad sortem "
+        "periculorum communium traxit. et instabat ut eum quoque cum tribunis et aliis pluribus ad comitatum imperatoris vinctum perduceret: quo percitus ille exitio urgente "
+        "abrupto ferro eundem adoritur Paulum. et quia languente dextera, letaliter ferire non potuit, iam districtum mucronem in proprium latus inpegit. hocquedeformi genere "
+        "mortis excessit e vita iustissimus rector ausus miserabiles casus levare multorum."
+        "Per hoc minui studium suum existimans "
+        "Paulus, ut erat in conplicandis negotiis artifex dirus, unde ei Catenae inditum est cognomentum, vicarium ipsum eos quibus praeerat adhuc defensantem ad sortem "
+        "periculorum communium traxit. et instabat ut eum quoque cum tribunis et aliis pluribus ad comitatum imperatoris vinctum perduceret: quo percitus ille exitio urgente "
+        "abrupto ferro eundem adoritur Paulum. et quia languente dextera, letaliter ferire non potuit, iam districtum mucronem in proprium latus inpegit. hocquedeformi genere "
+        "mortis excessit e vita iustissimus rector ausus miserabiles casus levare multorum.",
         softWrap: true,
       ),
     );
 
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -80,8 +97,20 @@ class MyApp extends StatelessWidget {
             // the App.build method, and use it to set our appbar title.
             title: const Text("mes recettes"),
           ),
-          body: Column(
-            children: [titleSection, buttonSection, descriptionSection],
+          body: ListView(
+            children: [
+              FadeInImage.assetNetwork(
+                image:
+                    'https://www.atelierdeschefs.com/media/recette-e30299-pizza-pepperoni-tomate-mozza.jpg',
+                width: 600,
+                height: 240,
+                fit: BoxFit.cover,
+                placeholder: "images/loader.gif",
+              ),
+              titleSection,
+              buttonSection,
+              descriptionSection
+            ],
           )),
     );
   }
