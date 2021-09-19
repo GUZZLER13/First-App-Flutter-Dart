@@ -4,11 +4,38 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+
+
+   Widget titleSection = (Container(
+    padding: const EdgeInsets.all(8),
+    child: Row(
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: const Text('pizza facile',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 20))),
+              Text("Stef DS",
+                  style: TextStyle(color: Colors.grey[700], fontSize: 20))
+            ],
+          ),
+        ),
+        const Icon(Icons.favorite, color: Colors.red),
+        const Text("55")
+      ],
+    ),
+  ));
+
+
+  MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -34,27 +61,7 @@ class MyApp extends StatelessWidget {
             title: const Text("mes recettes"),
           ),
           body: Column(
-            children: [
-              Row(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                          padding: const EdgeInsets.only(bottom: 8),
-                          child: const Text('pizza facile',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20))),
-                      Text("Stef DS",
-                          style:
-                              TextStyle(color: Colors.grey[700], fontSize: 20))
-                    ],
-                  ),
-                  Icon(Icons.favorite, color: Colors.red),
-                  Text("55")
-                ],
-              ),
-            ],
+            children: [titleSection],
           )),
     );
   }
