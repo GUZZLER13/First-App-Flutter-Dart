@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:untitled/favorite_change_notifier.dart';
 import 'package:untitled/favorite_widget.dart';
+import 'package:untitled/recipe.dart';
 
 class RecipeScreen extends StatelessWidget {
-  const RecipeScreen({Key? key}) : super(key: key);
+  final Recipe recipe;
+
+  const RecipeScreen({Key? key, required this.recipe}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,66 +32,51 @@ class RecipeScreen extends StatelessWidget {
               children: [
                 Container(
                     padding: const EdgeInsets.only(bottom: 8),
-                    child: const Text('pizza facile',
-                        style: TextStyle(
+                    child: Text(recipe.title,
+                        style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20))),
-                Text("Stef DS",
+                Text(recipe.user,
                     style: TextStyle(color: Colors.grey[700], fontSize: 20))
               ],
             ),
           ),
-          const FavoriteWidget(favoriteCount: 56, isFavorited: false,)
+          FavoriteIconWidget(),
+          FavoriteTextWidget()
         ],
       ),
     ));
 
     Widget descriptionSection = Container(
       padding: const EdgeInsets.all(32),
-      child: const Text(
-        "Per hoc minui studium suum existimans "
-            "Paulus, ut erat in conplicandis negotiis artifex dirus, unde ei Catenae inditum est cognomentum, vicarium ipsum eos quibus praeerat adhuc defensantem ad sortem "
-            "periculorum communium traxit. et instabat ut eum quoque cum tribunis et aliis pluribus ad comitatum imperatoris vinctum perduceret: quo percitus ille exitio urgente "
-            "abrupto ferro eundem adoritur Paulum. et quia languente dextera, letaliter ferire non potuit, iam districtum mucronem in proprium latus inpegit. hocquedeformi genere "
-            "mortis excessit e vita iustissimus rector ausus miserabiles casus levare multorum."
-            "Per hoc minui studium suum existimans "
-            "Paulus, ut erat in conplicandis negotiis artifex dirus, unde ei Catenae inditum est cognomentum, vicarium ipsum eos quibus praeerat adhuc defensantem ad sortem "
-            "periculorum communium traxit. et instabat ut eum quoque cum tribunis et aliis pluribus ad comitatum imperatoris vinctum perduceret: quo percitus ille exitio urgente "
-            "abrupto ferro eundem adoritur Paulum. et quia languente dextera, letaliter ferire non potuit, iam districtum mucronem in proprium latus inpegit. hocquedeformi genere "
-            "mortis excessit e vita iustissimus rector ausus miserabiles casus levare multorum."
-            "Per hoc minui studium suum existimans "
-            "Paulus, ut erat in conplicandis negotiis artifex dirus, unde ei Catenae inditum est cognomentum, vicarium ipsum eos quibus praeerat adhuc defensantem ad sortem "
-            "periculorum communium traxit. et instabat ut eum quoque cum tribunis et aliis pluribus ad comitatum imperatoris vinctum perduceret: quo percitus ille exitio urgente "
-            "abrupto ferro eundem adoritur Paulum. et quia languente dextera, letaliter ferire non potuit, iam districtum mucronem in proprium latus inpegit. hocquedeformi genere "
-            "mortis excessit e vita iustissimus rector ausus miserabiles casus levare multorum."
-            "Per hoc minui studium suum existimans "
-            "Paulus, ut erat in conplicandis negotiis artifex dirus, unde ei Catenae inditum est cognomentum, vicarium ipsum eos quibus praeerat adhuc defensantem ad sortem "
-            "periculorum communium traxit. et instabat ut eum quoque cum tribunis et aliis pluribus ad comitatum imperatoris vinctum perduceret: quo percitus ille exitio urgente "
-            "abrupto ferro eundem adoritur Paulum. et quia languente dextera, letaliter ferire non potuit, iam districtum mucronem in proprium latus inpegit. hocquedeformi genere "
-            "mortis excessit e vita iustissimus rector ausus miserabiles casus levare multorum.",
+      child: Text(
+        recipe.description,
         softWrap: true,
       ),
     );
-    return Scaffold(
-        appBar: AppBar(
-          // Here we take the value from the MyHomePage object that was created by
-          // the App.build method, and use it to set our appbar title.
-          title: const Text("mes recettes"),
-        ),
-        body: ListView(
-          children: [
-            FadeInImage.assetNetwork(
-              placeholder: "images/loader.gif",
-              image:
-              'https://www.atelierdeschefs.com/media/recette-e30299-pizza-pepperoni-tomate-mozza.jpg',
-              width: 600,
-              height: 240,
-              fit: BoxFit.cover,
-            ),
-            titleSection,
-            buttonSection,
-            descriptionSection
-          ],
-        ));
+    return ChangeNotifierProvider(
+      create: (context) =>
+          FavoriteChangeNotifier(recipe.isFavorite, recipe.favoriteCount),
+      child: Scaffold(
+          appBar: AppBar(
+            // Here we take the value from the MyHomePage object that was created by
+            // the App.build method, and use it to set our appbar title.
+            title: const Text("mes recettes"),
+          ),
+          body: ListView(
+            children: [
+              FadeInImage.assetNetwork(
+                placeholder: "images/loader.gif",
+                image: recipe.imageUrl,
+                width: 600,
+                height: 240,
+                fit: BoxFit.cover,
+              ),
+              titleSection,
+              buttonSection,
+              descriptionSection
+            ],
+          )),
+    );
   }
 
   Column _buildButtonColumn(Color color, IconData icon, String label) {

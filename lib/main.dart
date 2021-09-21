@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled/recipe_screen.dart';
 
+import 'recipe.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -18,7 +20,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      home: RecipeScreen(),
+      home: RecipeScreen(
+        recipe: Recipe(
+            "pizza facile",
+            "stef DS",
+            "https://media-cdn.tripadvisor.com/media/photo-p/0d/ca/11/e6/domino-s-pizza.jpg",
+            "faire cuire ton chat au four",
+            false,
+            50),
+      ),
     );
   }
 }
