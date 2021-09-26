@@ -64,12 +64,16 @@ class RecipeScreen extends StatelessWidget {
           ),
           body: ListView(
             children: [
-              FadeInImage.assetNetwork(
-                placeholder: "images/loader.gif",
-                image: recipe.imageUrl,
-                width: 600,
-                height: 240,
-                fit: BoxFit.cover,
+              // Hero sert à faire le lien entre la petite image et la grande (liste et détail)
+              Hero(
+                tag: "imageRecipe" + recipe.title,
+                child: FadeInImage.assetNetwork(
+                  placeholder: "images/loader.gif",
+                  image: recipe.imageUrl,
+                  width: 600,
+                  height: 240,
+                  fit: BoxFit.cover,
+                ),
               ),
               titleSection,
               buttonSection,
