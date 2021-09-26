@@ -2,7 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled/recipe.dart';
 
-class RecipeListScreen extends StatelessWidget {
+class RecipeListScreen extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return RecipeListScreenState();
+  }
+}
+
+class RecipeListScreenState extends State<RecipeListScreen> {
   final List<Recipe> recipes = [
     Recipe(
         "pizza ffsfdsfdsfsfsfcile",
@@ -80,7 +87,25 @@ class RecipeListScreen extends StatelessWidget {
         body: ListView.builder(
           itemCount: recipes.length,
           itemBuilder: (BuildContext context, int index) {
-            return RecipeItemWidget(recipe: recipes[index]);
+            //Récupération position (index)
+            final recipe = recipes[index];
+            // Dismissible ==> on peut swiper et faire disparaitre l'élément
+            return Dismissible(
+                key: Key(recipe.title),
+                onDismissed: (direction) {
+                  //le setState met à jour la vue
+                  setState(() {
+                    recipes.removeAt(index);
+                  });
+                  //affichage d'un petit message de confirmation
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("${recipe.title} supprimé")));
+                },
+                //Arrière-plan de l'élément pendant le swipe
+                background: Container(
+                  color: Colors.red,
+                ),
+                child: RecipeItemWidget(recipe: recipe));
           },
         ));
   }
